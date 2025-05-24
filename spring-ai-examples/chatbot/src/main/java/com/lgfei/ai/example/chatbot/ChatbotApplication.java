@@ -1,13 +1,13 @@
-package com.lgfei.ai.example.chatclient;
+package com.lgfei.ai.example.chatbot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ChatClientApplication {
+public class ChatbotApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ChatClientApplication.class, args);
+        SpringApplication.run(ChatbotApplication.class, args);
     }
 
 }
