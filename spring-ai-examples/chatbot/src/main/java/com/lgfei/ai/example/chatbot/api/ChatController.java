@@ -2,8 +2,10 @@ package com.lgfei.ai.example.chatbot.api;
 
 import com.lgfei.ai.example.chatbot.config.ChatModelFactory;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 
 /**
  * @author lgfei
@@ -21,10 +23,19 @@ public class ChatController {
 
     @GetMapping("/{model_key}")
     public ResponseEntity<String> chat(@PathVariable("model_key") String modelKey,
-                                       @RequestParam String prompt)
+                                       @RequestParam(value = "input", defaultValue = "你是谁") String input)
     {
         ChatClient chatClient = chatModelFactory.getClient(modelKey);
-        String reply = chatClient.prompt(prompt).call().content();
-        return ResponseEntity.ok(reply);
+        String output = chatClient.prompt(input).call().content();
+        return ResponseEntity.ok(output);
+    }
+
+    @GetMapping(value = "/stream/{model_key}", produces = "text/html;charset=UTF-8")
+    public Flux<String> streamChat(@PathVariable("model_key") String modelKey,
+                                   @RequestParam(value = "input", defaultValue = "你是谁") String input)
+    {
+        ChatClient chatClient = chatModelFactory.getClient(modelKey);
+        Flux<String> output = chatClient.prompt(input).stream().content();
+        return output;
     }
 }

@@ -27,8 +27,13 @@ public class ChatModelFactory {
         );
     }
 
-    public ChatClient getClient(String modelKey) {
+    public ChatModel getModel(String modelKey) {
         ChatModel model = modelMap.getOrDefault(modelKey.toLowerCase(), modelMap.get("ollama"));
+        return model;
+    }
+
+    public ChatClient getClient(String modelKey) {
+        ChatModel model = this.getModel(modelKey);
         return ChatClient.create(model);
     }
 }
