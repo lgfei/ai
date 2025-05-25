@@ -1,7 +1,13 @@
 package com.lgfei.ai.example.mcpclient;
 
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.tool.ToolCallbackProvider;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class McpClientApplication {
@@ -10,4 +16,23 @@ public class McpClientApplication {
         SpringApplication.run(McpClientApplication.class, args);
     }
 
+    @Value("${ai.user.input:今天纽约的天气}")
+    private String userInput;
+
+    @Bean
+    public CommandLineRunner predefinedQuestions(ChatClient.Builder chatClientBuilder, ToolCallbackProvider tools,
+                                                 ConfigurableApplicationContext context) {
+
+        return args -> {
+
+            var chatClient = chatClientBuilder
+                    .defaultToolCallbacks(tools)
+                    .build();
+
+            System.out.println("\n>>> QUESTION: " + userInput);
+            System.out.println("\n>>> ASSISTANT: " + chatClient.prompt(userInput).call().content());
+
+            context.close();
+        };
+    }
 }
