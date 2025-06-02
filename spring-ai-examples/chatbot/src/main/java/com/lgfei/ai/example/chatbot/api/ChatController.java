@@ -21,20 +21,20 @@ public class ChatController {
         this.chatModelFactory = chatModelFactory;
     }
 
-    @GetMapping("/{model_key}")
-    public ResponseEntity<String> chat(@PathVariable("model_key") String modelKey,
+    @GetMapping("/{model_provider}")
+    public ResponseEntity<String> chat(@PathVariable("model_provider") String modelProvider,
                                        @RequestParam(value = "input", defaultValue = "你是谁") String input)
     {
-        ChatClient chatClient = chatModelFactory.getClient(modelKey);
+        ChatClient chatClient = chatModelFactory.getClient(modelProvider);
         String output = chatClient.prompt(input).call().content();
         return ResponseEntity.ok(output);
     }
 
-    @GetMapping(value = "/stream/{model_key}", produces = "text/html;charset=UTF-8")
-    public Flux<String> streamChat(@PathVariable("model_key") String modelKey,
+    @GetMapping(value = "/stream/{modelProvider}", produces = "text/html;charset=UTF-8")
+    public Flux<String> streamChat(@PathVariable("c") String modelProvider,
                                    @RequestParam(value = "input", defaultValue = "你是谁") String input)
     {
-        ChatClient chatClient = chatModelFactory.getClient(modelKey);
+        ChatClient chatClient = chatModelFactory.getClient(modelProvider);
         Flux<String> output = chatClient.prompt(input).stream().content();
         return output;
     }

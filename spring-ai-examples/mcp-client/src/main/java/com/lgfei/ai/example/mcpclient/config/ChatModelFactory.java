@@ -1,7 +1,8 @@
-package com.lgfei.ai.example.chatbot.config;
+package com.lgfei.ai.example.mcpclient.config;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
@@ -14,17 +15,20 @@ import java.util.Map;
 @Component
 public class ChatModelFactory {
     private final Map<String, ChatModel> modelMap;
+    private final ToolCallbackProvider callbackProvider;
 
     public ChatModelFactory(
             @Qualifier("openAiChatModel") ChatModel openAi,
             @Qualifier("ollamaChatModel") ChatModel ollama,
-            @Qualifier("deepSeekChatModel") ChatModel deepSeek
+            @Qualifier("deepSeekChatModel") ChatModel deepSeek,
+            ToolCallbackProvider callbackProvider
     ) {
         this.modelMap = Map.of(
                 "openai", openAi,
                 "ollama", ollama,
                 "deepseek", deepSeek
         );
+        this.callbackProvider = callbackProvider;
     }
 
     public ChatModel getModel(String modelProvider) {
@@ -34,6 +38,9 @@ public class ChatModelFactory {
 
     public ChatClient getClient(String modelProvider) {
         ChatModel model = this.getModel(modelProvider);
-        return ChatClient.create(model);
+       return ChatClient.create(model)
+               .mutate()
+               .defaultToolCallbacks(callbackProvider)
+               .build();
     }
 }

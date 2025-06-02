@@ -16,23 +16,23 @@ public class McpClientApplication {
         SpringApplication.run(McpClientApplication.class, args);
     }
 
-    @Value("${ai.user.input:今天纽约的天气}")
-    private String userInput;
-
-    @Bean
-    public CommandLineRunner predefinedQuestions(ChatClient.Builder chatClientBuilder, ToolCallbackProvider tools,
-                                                 ConfigurableApplicationContext context) {
-
-        return args -> {
-
-            var chatClient = chatClientBuilder
-                    .defaultToolCallbacks(tools)
-                    .build();
-
-            System.out.println("\n>>> QUESTION: " + userInput);
-            System.out.println("\n>>> ASSISTANT: " + chatClient.prompt(userInput).call().content());
-
-            context.close();
-        };
-    }
+//    @Value("${ai.user.input:今天纽约的天气}")
+//    private String userInput;
+//
+//    @Bean
+//    public CommandLineRunner predefinedQuestions(ChatClient.Builder chatClientBuilder, ToolCallbackProvider tools,
+//                                                 ConfigurableApplicationContext context) {
+//
+//        return args -> {
+//
+//            var chatClient = chatClientBuilder
+//                    .defaultToolCallbacks(tools)
+//                    .build();
+//
+//            System.out.println("\n>>> QUESTION: " + userInput);
+//            System.out.println("\n>>> ASSISTANT: " + chatClient.prompt(userInput).call().content());
+//
+//            context.close();
+//        };
+//    }
 }
