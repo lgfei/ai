@@ -1,10 +1,10 @@
-package com.lgfei.ai.goashore;
+package com.lgfei.ai.ashore;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class GoashoreApplicationTests {
+class AshoreApplicationTests {
 
 	@Test
 	void contextLoads() {
