@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>阿里云大模型ACP - 在线模拟测试</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div class="container">
+    <header class="hero">
+      <h1>阿里云大模型 ACP 模拟考试</h1>
+      <p class="subtitle">大模型高级工程师认证 · 在线模拟测试</p>
+    </header>
+
+    <section class="exam-meta">
+      <h2>考试说明</h2>
+      <ul>
+        <li><span class="label">题目数量</span><span class="value">75 题（单选题 50 题 + 多选题 25 题）</span></li>
+        <li><span class="label">考试时长</span><span class="value">120 分钟</span></li>
+        <li><span class="label">分值</span><span class="value">单选题每题 1 分，多选题每题 2 分，总分 100 分</span></li>
+        <li><span class="label">及格分数</span><span class="value">80 分</span></li>
+        <li><span class="label">题型</span><span class="value">单选题、多选题</span></li>
+      </ul>
+    </section>
+
+    <section class="syllabus-block">
+      <h2>知识点分布（与正式考试一致）</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>考核知识点</th>
+            <th>试题比例</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>大模型应用开发</td>
+            <td>17%</td>
+          </tr>
+          <tr>
+            <td>大模型提示词工程</td>
+            <td>15%</td>
+          </tr>
+          <tr>
+            <td>大模型检索增强</td>
+            <td>20%</td>
+          </tr>
+          <tr>
+            <td>大模型微调</td>
+            <td>16%</td>
+          </tr>
+          <tr>
+            <td>多Agent及多模态应用</td>
+            <td>16%</td>
+          </tr>
+          <tr>
+            <td>生产环境应用实践</td>
+            <td>16%</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="startExam">开始模拟考试</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('startExam').addEventListener('click', function () {
+      window.location.href = 'exam.html';
+    });
+  </script>
+</body>
+
+</html>

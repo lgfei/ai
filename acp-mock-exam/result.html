@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>考试成绩 - 阿里云大模型ACP模拟</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="result-hero">
+      <h1>模拟考试成绩</h1>
+      <div class="score-circle" id="scoreCircle">0</div>
+      <p class="score-total" id="scoreTotal">/ 100 分</p>
+      <p class="pass-msg hidden" id="passMsg">恭喜，已达到及格线！</p>
+      <p class="fail-msg hidden" id="failMsg">未达及格线，建议复习后再次模拟。</p>
+    </header>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="value" id="statScore">0</div>
+        <div class="label">得分</div>
+      </div>
+      <div class="stat-card">
+        <div class="value" id="statCorrect">0</div>
+        <div class="label">正确题数</div>
+      </div>
+      <div class="stat-card">
+        <div class="value" id="statTotal">0</div>
+        <div class="label">总题数</div>
+      </div>
+      <div class="stat-card">
+        <div class="value" id="statTime">0:00</div>
+        <div class="label">用时</div>
+      </div>
+    </div>
+
+    <section class="review-section" id="reviewSection">
+      <h2>错题与解析</h2>
+      <div id="reviewList"></div>
+    </section>
+
+    <div class="actions" style="margin-top:24px;">
+      <a href="index.html" class="btn btn-secondary">再考一次</a>
+      <a href="exam.html" class="btn btn-primary">重新抽题并考试</a>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const raw = sessionStorage.getItem('acpExamResults');
+      if (!raw) {
+        window.location.href = 'index.html';
+        return;
+      }
+      const data = JSON.parse(raw);
+      const { results, score, total, correct, timeUsed } = data;
+
+      const pass = score >= 80;
+      document.getElementById('scoreCircle').textContent = score;
+      document.getElementById('scoreTotal').textContent = '/ 100 分';
+      document.getElementById('scoreCircle').className = 'score-circle ' + (pass ? 'pass' : 'fail');
+      document.getElementById(pass ? 'passMsg' : 'failMsg').classList.remove('hidden');
+      document.getElementById('statScore').textContent = score + ' / 100';
+      document.getElementById('statCorrect').textContent = correct;
+      document.getElementById('statTotal').textContent = total;
+      const m = Math.floor(timeUsed / 60);
+      const s = timeUsed % 60;
+      document.getElementById('statTime').textContent = m + ':' + (s < 10 ? '0' : '') + s;
+
+      const wrong = results.filter(function(r) { return !r.correct; });
+      const reviewList = document.getElementById('reviewList');
+      const reviewSection = document.getElementById('reviewSection');
+
+      if (wrong.length === 0) {
+        reviewSection.innerHTML = '<h2>错题与解析</h2><p style="color:var(--text-muted);">全部正确，无需错题回顾。</p>';
+      } else {
+        wrong.forEach(function(r, i) {
+          const div = document.createElement('div');
+          div.className = 'review-item';
+          let optionsHtml = '';
+          if (r.options && r.options.length) {
+            optionsHtml = '<div class="review-options"><strong>选项：</strong><ul>';
+            r.options.forEach(function(opt) { optionsHtml += '<li>' + opt + '</li>'; });
+            optionsHtml += '</ul></div>';
+          }
+          div.innerHTML =
+            '<div class="q-num">第 ' + (results.indexOf(r) + 1) + ' 题 · ' + r.category + (r.maxPoints === 2 ? ' · 多选' : '') + '</div>' +
+            '<div class="q-text">' + r.question + '</div>' +
+            optionsHtml +
+            '<div class="your-answer wrong">你的答案：' + (r.displayUser || '未作答') + '</div>' +
+            '<div class="correct-answer">正确答案：' + r.displayAnswer + '</div>' +
+            (r.explanation ? '<div class="explanation"><strong>正确答案来源：</strong>' + r.explanation + '</div>' : '');
+          reviewList.appendChild(div);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模拟考试中 - 阿里云大模型ACP</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="exam-header">
+      <div class="timer" id="timer">120:00</div>
+      <div class="progress-text" id="progress">第 1 / 75 题</div>
+    </div>
+
+    <div class="question-card">
+      <div class="category-line">
+        <span class="category" id="category"></span>
+        <span class="question-type-tag" id="questionTypeTag"></span>
+      </div>
+      <div class="question-text" id="questionText"></div>
+      <div class="options" id="options"></div>
+    </div>
+
+    <div class="nav-dots" id="navDots"></div>
+
+    <div class="nav-buttons">
+      <div class="left">
+        <button class="btn btn-secondary" id="btnPrev" type="button">上一题</button>
+        <button class="btn btn-secondary" id="btnNext" type="button">下一题</button>
+      </div>
+      <button class="btn btn-primary" id="btnSubmit" type="button">交卷</button>
+    </div>
+  </div>
+
+  <script src="js/questions.js"></script>
+  <script src="js/exam.js"></script>
+</body>
+</html>
