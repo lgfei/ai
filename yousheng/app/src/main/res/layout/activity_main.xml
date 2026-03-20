@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/background">
+
+    <!-- 应用标题 -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:gravity="center"
+        android:padding="16dp"
+        android:layout_marginBottom="8dp"
+        android:textAppearance="@style/TextStyle.LargeTitle" />
+
+    <!-- 状态提示 -->
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/loading_voice"
+        android:textAppearance="@style/TextStyle.Hint" />
+
+    <!-- 文本输入区域 -->
+    <EditText
+        android:id="@+id/etTextInput"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="top|start"
+        android:hint="@string/hint_input_text"
+        android:inputType="textMultiLine|textAutoCorrect"
+        android:background="@android:drawable/edit_text"
+        android:padding="16dp"
+        android:textAppearance="@style/TextStyle.LargeBody"
+        android:importantForAccessibility="yes"
+        android:accessibilityLiveRegion="polite" />
+
+    <!-- 按钮区域 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:weightSum="3">
+
+        <!-- 开始朗读按钮 -->
+        <Button
+            android:id="@+id/btnRead"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/button_read"
+            android:layout_marginEnd="8dp"
+            android:enabled="false"
+            style="@style/ButtonStyle.Read" />
+
+        <!-- 停止按钮 -->
+        <Button
+            android:id="@+id/btnStop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/button_stop"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:enabled="false"
+            style="@style/ButtonStyle.Stop" />
+
+        <!-- 暂停/继续按钮 -->
+        <Button
+            android:id="@+id/btnPauseResume"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/button_pause"
+            android:layout_marginStart="8dp"
+            android:enabled="false"
+            style="@style/ButtonStyle.Control" />
+
+    </LinearLayout>
+
+    <!-- 清空按钮 -->
+    <Button
+        android:id="@+id/btnClear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/button_clear"
+        style="@style/ButtonStyle.Small" />
+
+</LinearLayout>

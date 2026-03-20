@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 应用名称 -->
+    <string name="app_name">优声</string>
+
+    <!-- 主界面 -->
+    <string name="hint_input_text">请输入或粘贴要朗读的文字</string>
+    <string name="button_read">开始朗读</string>
+    <string name="button_stop">停止</string>
+    <string name="button_pause">暂停</string>
+    <string name="button_resume">继续</string>
+    <string name="button_clear">清空</string>
+
+    <!-- 语音控制 -->
+    <string name="speech_rate">语速</string>
+    <string name="speech_pitch">音调</string>
+    <string name="speech_volume">音量</string>
+
+    <!-- 提示信息 -->
+    <string name="loading_voice">正在初始化语音引擎...</string>
+    <string name="voice_ready">语音引擎已就绪</string>
+    <string name="voice_error">语音引擎初始化失败，请检查设置</string>
+    <string name="no_text">请先输入文字</string>
+    <string name="reading">正在朗读...</string>
+    <string name="paused">已暂停</string>
+    <string name="stopped">已停止</string>
+</resources>

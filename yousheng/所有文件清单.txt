@@ -1,0 +1,213 @@
+优声 (YouSheng) 文字转语音应用 - 所有文件清单
+================================================================================
+
+项目创建日期: 2026-03-19
+项目位置: /mnt/e/Test/llm/yousheng
+总文件数: 23 个
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+一、项目配置文件 (6个)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. build.gradle
+   位置: /mnt/e/Test/llm/yousheng/build.gradle
+   用途: 项目根构建配置文件
+   大小: 460 字节
+
+2. settings.gradle  
+   位置: /mnt/e/Test/llm/yousheng/settings.gradle
+   用途: Gradle 项目设置
+   大小: 344 字节
+
+3. gradlew
+   位置: /mnt/e/Test/llm/yousheng/gradlew
+   用途: Gradle wrapper 脚本 (Linux)
+   大小: 260 字节
+
+4. gradle-wrapper.properties
+   位置: /mnt/e/Test/llm/yousheng/gradle/wrapper/gradle-wrapper.properties
+   用途: Gradle 版本配置
+   大小: 170 字节
+
+5. app/build.gradle
+   位置: /mnt/e/Test/llm/yousheng/app/build.gradle
+   用途: 应用模块构建配置
+   大小: 1,142 字节
+
+6. .gitignore
+   位置: /mnt/e/Test/llm/yousheng/.gitignore
+   用途: Git 版本控制忽略文件配置
+   大小: 566 字节
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+二、应用源代码 (1个)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+7. MainActivity.kt
+   位置: /mnt/e/Test/llm/yousheng/app/src/main/java/com/yousheng/tts/MainActivity.kt
+   用途: 应用主逻辑代码，实现 TTS 功能
+   大小: 5,283 字节
+   行数: ~150 行
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+三、应用资源文件 (8个)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+8. AndroidManifest.xml
+   位置: /mnt/e/Test/llm/yousheng/app/src/main/AndroidManifest.xml
+   用途: 应用清单文件，声明权限和组件
+   大小: 741 字节
+
+9. activity_main.xml
+   位置: /mnt/e/Test/llm/yousheng/app/src/main/res/layout/activity_main.xml
+   用途: 主界面布局文件
+   大小: 2,476 字节
+
+10. strings.xml
+    位置: /mnt/e/Test/llm/yousheng/app/src/main/res/values/strings.xml
+    用途: 字符串资源，应用所有文字
+    大小: 942 字节
+
+11. colors.xml
+    位置: /mnt/e/Test/llm/yousheng/app/src/main/res/values/colors.xml
+    用途: 颜色资源，定义应用色彩方案
+    大小: 807 字节
+
+12. styles.xml
+    位置: /mnt/e/Test/llm/yousheng/app/src/main/res/values/styles.xml
+    用途: 样式资源，定义字体、按钮等样式
+    大小: 2,753 字节
+
+13. btn_primary.xml
+    位置: /mnt/e/Test/llm/yousheng/app/src/main/res/drawable/btn_primary.xml
+    用途: 按钮样式定义
+    大小: 723 字节
+
+14. backup_rules.xml
+    位置: /mnt/e/Test/llm/yousheng/app/src/main/res/xml/backup_rules.xml
+    用途: 应用数据备份规则
+    大小: 226 字节
+
+15. data_extraction_rules.xml
+    位置: /mnt/e/Test/llm/yousheng/app/src/main/res/xml/data_extraction_rules.xml
+    用途: 数据提取规则
+    大小: 223 字节
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+四、文档文件 (8个)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+16. README.md
+    位置: /mnt/e/Test/llm/yousheng/README.md
+    用途: 项目说明文档，用户指南
+    大小: 2.5K
+
+17. CLAUDE.md
+    位置: /mnt/e/Test/llm/yousheng/CLAUDE.md
+    用途: Claude Code 开发指南
+    大小: 2.3K
+
+18. INSTALL.md
+    位置: /mnt/e/Test/llm/yousheng/INSTALL.md
+    用途: 详细安装和运行指南
+    大小: 4.2K
+
+19. 开发指南.md
+    位置: /mnt/e/Test/llm/yousheng/开发指南.md
+    用途: 开发者技术文档
+    大小: 2.9K
+
+20. 项目总结.md
+    位置: /mnt/e/Test/llm/yousheng/项目总结.md
+    用途: 项目完成情况总结
+    大小: 3.1K
+
+21. 项目结构说明.txt
+    位置: /mnt/e/Test/llm/yousheng/项目结构说明.txt
+    用途: 项目文件结构说明
+    大小: 2.9K
+
+22. 快速开始指南.txt
+    位置: /mnt/e/Test/llm/yousheng/快速开始指南.txt
+    用途: 快速开始使用指南
+    大小: 6.0K
+
+23. 完成报告.txt
+    位置: /mnt/e/Test/llm/yousheng/完成报告.txt
+    用途: 项目完成详细报告
+    大小: 11K
+
+    所有文件清单.txt
+    位置: /mnt/e/Test/llm/yousheng/所有文件清单.txt
+    用途: 本文件
+    大小: 动态
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+文件类型统计
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+配置文件:     6 个  (.gradle, .properties, .gitignore)
+源代码文件:   1 个  (.kt)
+布局文件:     1 个  (.xml)
+资源文件:     7 个  (.xml)
+文档文件:     8 个  (.md, .txt)
+
+总计:         23 个文件
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+代码统计
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Kotlin 代码:  ~150 行
+XML 布局:    ~100 行  
+XML 资源:    ~200 行
+文档字数:    ~20,000 字
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+项目目录结构
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+yousheng/
+├── .gitignore
+├── build.gradle
+├── settings.gradle
+├── gradlew
+├── gradle/
+│   └── wrapper/
+│       └── gradle-wrapper.properties
+├── app/
+│   ├── build.gradle
+│   └── src/main/
+│       ├── AndroidManifest.xml
+│       ├── java/com/yousheng/tts/
+│       │   └── MainActivity.kt
+│       └── res/
+│           ├── layout/
+│           │   └── activity_main.xml
+│           ├── values/
+│           │   ├── strings.xml
+│           │   ├── colors.xml
+│           │   └── styles.xml
+│           ├── drawable/
+│           │   └── btn_primary.xml
+│           └── xml/
+│               ├── backup_rules.xml
+│               └── data_extraction_rules.xml
+├── *.md (7个)
+└── *.txt (5个)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+包名 (Package Name)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+com.yousheng.tts
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

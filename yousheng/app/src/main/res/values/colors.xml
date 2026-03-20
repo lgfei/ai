@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 老年人友好的颜色方案 - 高对比度 -->
+
+    <!-- 主题颜色 -->
+    <color name="primary">#2196F3</color>
+    <color name="primary_dark">#1976D2</color>
+    <color name="primary_light">#BBDEFB</color>
+
+    <!-- 背景颜色 -->
+    <color name="background">#FFFFFF</color>
+    <color name="card_background">#F5F5F5</color>
+
+    <!-- 文字颜色 -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_hint">#9E9E9E</color>
+
+    <!-- 按钮颜色 -->
+    <color name="button_read">#4CAF50</color>
+    <color name="button_stop">#F44336</color>
+    <color name="button_control">#FF9800</color>
+
+    <!-- 分隔线颜色 -->
+    <color name="divider">#E0E0E0</color>
+
+    <!-- 禁用状态颜色 -->
+    <color name="disabled">#BDBDBD</color>
+</resources>

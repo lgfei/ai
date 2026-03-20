@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 备份规则 - 空规则禁止备份 -->
+    <data-extraction-rules>
+        <cloud-backup>
+            <include domain="sharedpref" path="." />
+        </cloud-backup>
+    </data-extraction-rules>
+</resources>

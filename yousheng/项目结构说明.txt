@@ -1,0 +1,75 @@
+========================================
+优声文字转语音应用 - 项目结构
+========================================
+
+项目根目录 (/mnt/e/Test/llm/yousheng/)
+│
+├── 项目配置文件
+│   ├── build.gradle                     项目根构建配置
+│   ├── settings.gradle                  Gradle 设置
+│   ├── gradlew                          Gradle wrapper 脚本 (Linux)
+│   └── gradle/wrapper/
+│       └── gradle-wrapper.properties    Gradle 版本配置
+│
+├── 应用模块 (app/)
+│   ├── build.gradle                     应用模块构建配置
+│   └── src/main/
+│       ├── AndroidManifest.xml          应用清单文件
+│       │
+│       ├── java/com/yousheng/tts/
+│       │   └── MainActivity.kt          主要源代码 (Kotlin)
+│       │
+│       └── res/                         资源文件
+│           ├── layout/
+│           │   └── activity_main.xml    主界面布局
+│           │
+│           ├── values/
+│           │   ├── strings.xml         字符串资源 (中文化)
+│           │   ├── colors.xml          颜色资源 (高对比度)
+│           │   └── styles.xml          样式资源 (大字体/大按钮)
+│           │
+│           ├── drawable/
+│           │   └── btn_primary.xml     按钮样式
+│           │
+│           └── xml/
+│               ├── backup_rules.xml            备份规则
+│               └── data_extraction_rules.xml  数据提取规则
+│
+├── 文档文件
+│   ├── README.md                        项目说明 (用户指南)
+│   ├── CLAUDE.md                        Claude Code 开发指南
+│   ├── 开发指南.md                       详细开发文档
+│   ├── 项目总结.md                       项目完成总结
+│   └── 项目结构说明.txt                 本文件
+│
+└── 配置文件
+    └── .gitignore                       Git 忽略文件
+
+========================================
+文件统计
+========================================
+
+- 源代码文件: 1 个 (MainActivity.kt)
+- 布局文件: 1 个 (activity_main.xml)
+- 资源文件: 7 个 (strings/colors/styles 等)
+- 配置文件: 5 个 (build.gradle/settings.gradle 等)
+- 文档文件: 5 个 (README/CLAUDE/开发指南 等)
+- 总计: 19 个文件
+
+========================================
+快速开始
+========================================
+
+1. 打开 Android Studio
+2. File → Open → 选择本项目目录
+3. 等待 Gradle 同步
+4. 连接设备或启动模拟器
+5. 点击运行按钮
+
+========================================
+应用包名
+========================================
+
+com.yousheng.tts
+
+========================================

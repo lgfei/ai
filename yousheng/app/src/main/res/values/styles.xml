@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- 基础主题 -->
+    <style name="Base.Theme.YouShengTTS" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- 主要颜色 -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/primary</item>
+
+        <!-- 老年人友好设置 -->
+        <item name="android:textSize">16sp</item>
+        <item name="android:windowBackground">@color/background</item>
+    </style>
+
+    <!-- 应用主题 -->
+    <style name="Theme.YouShengTTS" parent="Base.Theme.YouShengTTS" />
+
+    <!-- 大标题样式 - 用于老年人阅读 -->
+    <style name="TextStyle.LargeTitle">
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <!-- 大正文样式 -->
+    <style name="TextStyle.LargeBody">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+    </style>
+
+    <!-- 按钮样式 - 大按钮 -->
+    <style name="ButtonStyle.Large">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingStart">32dp</item>
+        <item name="android:paddingEnd">32dp</item>
+        <item name="android:minWidth">200dp</item>
+        <item name="android:minHeight">64dp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!-- 读取按钮样式 -->
+    <style name="ButtonStyle.Read" parent="ButtonStyle.Large">
+        <item name="android:background">@color/button_read</item>
+    </style>
+
+    <!-- 停止按钮样式 -->
+    <style name="ButtonStyle.Stop" parent="ButtonStyle.Large">
+        <item name="android:background">@color/button_stop</item>
+    </style>
+
+    <!-- 暂停/继续按钮样式 -->
+    <style name="ButtonStyle.Control" parent="ButtonStyle.Large">
+        <item name="android:background">@color/button_control</item>
+    </style>
+
+    <!-- 辅助按钮样式 - 较小 -->
+    <style name="ButtonStyle.Small">
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:minWidth">120dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <!-- 提示文字样式 -->
+    <style name="TextStyle.Hint">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/text_hint</item>
+    </style>
+
+    <!-- 输入框样式 -->
+    <style name="EditTextStyle.Large">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textColorHint">@color/text_hint</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+    </style>
+
+</resources>
