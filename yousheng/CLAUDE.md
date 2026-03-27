@@ -1,10 +1,10 @@
-# CLAUDE.md
+s# CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 
-这是一个为老年人设计的安卓文字转语音应用（优声/YouSheng）。
+这是一个为老年人设计的安卓文字转语音应用（有声/YouSheng）。
 
 ### 核心功能
 - 文字转语音（TTS）功能
@@ -25,7 +25,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### 关键文件结构
 ```
-/mnt/e/Test/llm/yousheng/
+yousheng/
 ├── app/
 │   ├── src/main/
 │   │   ├── AndroidManifest.xml              # 应用清单

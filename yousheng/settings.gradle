@@ -1,4 +1,4 @@
-# Settings Gradle
+// Settings Gradle
 pluginManagement {
     repositories {
         google()
@@ -15,5 +15,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "优声"
+rootProject.name = "YouSheng"
 include(":app")

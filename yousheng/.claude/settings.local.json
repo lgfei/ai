@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./gradlew assembleDebug)",
+      "Bash(where gradle:*)",
+      "Bash(bash gradlew:*)",
+      "Bash(\"C:\\\\Users\\\\lgfei\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\platform-tools\\\\adb.exe\" shell:*)",
+      "Bash(\"C:\\\\Users\\\\lgfei\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\cmdline-tools\\\\latest\\\\bin\\\\sdkmanager.bat\" --list)",
+      "Bash(export JAVA_HOME=\"D:/Programs/Java/jdk-17.0.7\")",
+      "Bash(./gradlew.bat assembleDebug)",
+      "Bash(./gradlew.bat installDebug)"
+    ]
+  }
+}

@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         setupButtonClickListeners()
 
         // 显示欢迎消息
-        Toast.makeText(this, "欢迎使用优声文字转语音", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "欢迎使用有声文字转语音", Toast.LENGTH_SHORT).show()
     }
 
     override fun onInit(status: Int) {
@@ -113,6 +113,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             startReading()
         }
 
+
         btnStop.setOnClickListener {
             stopReading()
         }
@@ -138,10 +139,10 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             return
         }
 
-        // 使用 HashMap 传递参数
+        // 使用 Bundle 传递参数
         val utteranceId = this.javaClass.canonicalName
-        val params = HashMap<String, String>()
-        params[Engine.KEY_PARAM_UTTERANCE_ID] = utteranceId
+        val params = Bundle()
+        params.putString(Engine.KEY_PARAM_UTTERANCE_ID, utteranceId)
 
         textToSpeech.speak(currentText, TextToSpeech.QUEUE_FLUSH, params, utteranceId)
     }
@@ -158,8 +159,8 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun resumeReading() {
         if (isPaused) {
             val utteranceId = this.javaClass.canonicalName
-            val params = HashMap<String, String>()
-            params[Engine.KEY_PARAM_UTTERANCE_ID] = utteranceId
+            val params = Bundle()
+            params.putString(Engine.KEY_PARAM_UTTERANCE_ID, utteranceId)
 
             textToSpeech.speak(currentText, TextToSpeech.QUEUE_FLUSH, params, utteranceId)
         }

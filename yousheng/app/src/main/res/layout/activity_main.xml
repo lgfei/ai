@@ -37,10 +37,10 @@
         android:layout_weight="1"
         android:gravity="top|start"
         android:hint="@string/hint_input_text"
-        android:inputType="textMultiLine|textAutoCorrect"
+        android:inputType="textMultiLine|textCapCharacters|textNoSuggestions|textVisiblePassword"
         android:background="@android:drawable/edit_text"
         android:padding="16dp"
-        android:textAppearance="@style/TextStyle.LargeBody"
+        android:textAppearance="@style/EditTextStyle.Large"
         android:importantForAccessibility="yes"
         android:accessibilityLiveRegion="polite" />
 
