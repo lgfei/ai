@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:background="@color/background">
+
+    <!-- 关闭按钮（右上角） -->
+    <Button
+        android:id="@+id/dialogBtnCloseHistory"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/ic_clear"
+        android:gravity="center"
+        android:text="×"
+        android:textColor="@color/text_primary"
+        android:textSize="24sp" />
+
+    <!-- 弹框标题 -->
+
+    <!-- 历史列表容器 -->
+
+    <TextView
+        android:id="@+id/dialogTitle"
+        android:layout_width="300dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="最近输入"
+        android:textColor="@color/text_primary"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/historyListContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/dialogTitle"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="12dp">
+
+        <!-- 历史项将通过代码动态添加 -->
+
+    </LinearLayout>
+
+</RelativeLayout>

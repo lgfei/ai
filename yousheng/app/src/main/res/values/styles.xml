@@ -32,6 +32,12 @@
         <item name="android:textColorHint">@color/text_hint</item>
     </style>
 
+    <!-- 中等标题样式 -->
+    <style name="TextStyle.MediumTitle" parent="TextStyle">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <!-- 大标题样式 - 用于老年人阅读 -->
     <style name="TextStyle.LargeTitle" parent="TextStyle">
         <item name="android:textSize">28sp</item>
@@ -71,16 +77,81 @@
         <item name="android:background">@color/button_control</item>
     </style>
 
-    <!-- 辅助按钮样式 - 较小 -->
+    <!-- 小实体按钮样式 -->
     <style name="ButtonStyle.Small" parent="ButtonStyle">
         <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:paddingTop">12dp</item>
         <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:background">@drawable/btn_solid</item>
+        <item name="android:elevation">3dp</item>
+        <item name="android:drawablePadding">8dp</item>
+    </style>
+
+    <!-- 小实体读取按钮样式 -->
+    <style name="ButtonStyle.Small.Read" parent="ButtonStyle.Small">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/btn_solid_read</item>
+        <item name="android:drawablePadding">8dp</item>
+    </style>
+
+    <!-- 小实体停止按钮样式 -->
+    <style name="ButtonStyle.Small.Stop" parent="ButtonStyle.Small">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/btn_solid_stop</item>
+        <item name="android:drawablePadding">8dp</item>
+    </style>
+
+    <!-- 小实体控制按钮样式 -->
+    <style name="ButtonStyle.Small.Control" parent="ButtonStyle.Small">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/btn_solid_control</item>
+        <item name="android:drawablePadding">8dp</item>
+    </style>
+
+    <!-- 实体按钮样式 - 有边框和阴影 -->
+    <style name="ButtonStyle.Solid" parent="ButtonStyle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
         <item name="android:paddingStart">24dp</item>
         <item name="android:paddingEnd">24dp</item>
-        <item name="android:minWidth">120dp</item>
-        <item name="android:minHeight">48dp</item>
-        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:minHeight">56dp</item>
+        <item name="android:background">@drawable/btn_solid</item>
+        <item name="android:elevation">4dp</item>
+    </style>
+
+    <!-- 实体读取按钮样式 -->
+    <style name="ButtonStyle.Solid.Read" parent="ButtonStyle.Solid">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/btn_solid_read</item>
+    </style>
+
+    <!-- 实体停止按钮样式 -->
+    <style name="ButtonStyle.Solid.Stop" parent="ButtonStyle.Solid">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/btn_solid_stop</item>
+    </style>
+
+    <!-- 实体控制按钮样式 -->
+    <style name="ButtonStyle.Solid.Control" parent="ButtonStyle.Solid">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/btn_solid_control</item>
+    </style>
+
+    <!-- 大实体按钮样式 - 用于开始朗读按钮 -->
+    <style name="ButtonStyle.Solid.Large" parent="ButtonStyle.Solid.Read">
+        <item name="android:textSize">22sp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingStart">32dp</item>
+        <item name="android:paddingEnd">32dp</item>
+        <item name="android:minHeight">64dp</item>
+        <item name="android:elevation">6dp</item>
     </style>
 
     <!-- 提示文字样式 -->

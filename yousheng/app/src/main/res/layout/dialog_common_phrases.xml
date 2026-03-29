@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:background="@color/background">
+
+    <!-- 关闭按钮（右上角） -->
+
+    <!-- 弹框标题 -->
+    <Button
+        android:id="@+id/dialogBtnClose"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/ic_clear"
+        android:gravity="center"
+        android:text="×"
+        android:textColor="@color/text_primary"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/dialogTitle"
+        android:layout_width="320dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="常用语"
+        android:textColor="@color/text_primary"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <!-- 按钮容器 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/dialogTitle"
+        android:layout_marginTop="4dp">
+
+        <!-- 第一行常用语按钮 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/dialogBtnPhrase1"
+                style="@style/ButtonStyle.Small.Read"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:text="@string/phrase_hello"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/dialogBtnPhrase2"
+                style="@style/ButtonStyle.Small.Read"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:text="@string/phrase_where_bathroom"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <!-- 第二行常用语按钮 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/dialogBtnPhrase3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/phrase_im_cold"
+                android:layout_marginEnd="4dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="18sp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                style="@style/ButtonStyle.Small.Read" />
+
+            <Button
+                android:id="@+id/dialogBtnPhrase4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/phrase_im_hot"
+                android:layout_marginStart="4dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="18sp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                style="@style/ButtonStyle.Small.Read" />
+
+        </LinearLayout>
+
+        <!-- 第三行常用语按钮 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/dialogBtnPhrase5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/phrase_im_hungry"
+                android:layout_marginEnd="4dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="18sp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                style="@style/ButtonStyle.Small.Read" />
+
+            <Button
+                android:id="@+id/dialogBtnPhrase6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/phrase_im_thirsty"
+                android:layout_marginStart="4dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="18sp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                style="@style/ButtonStyle.Small.Read" />
+
+        </LinearLayout>
+
+        <!-- 第四行常用语按钮 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/dialogBtnPhrase7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/phrase_im_tired"
+                android:layout_marginEnd="4dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="18sp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                style="@style/ButtonStyle.Small.Read" />
+
+            <Button
+                android:id="@+id/dialogBtnPhrase8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/phrase_need_help"
+                android:layout_marginStart="4dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="18sp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                style="@style/ButtonStyle.Small.Read" />
+
+        </LinearLayout>
+
+        <!-- 第五行常用语按钮 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/dialogBtnPhrase9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/phrase_wait_moment"
+                android:layout_marginEnd="4dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="18sp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                style="@style/ButtonStyle.Small.Read" />
+
+            <Button
+                android:id="@+id/dialogBtnPhrase10"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/phrase_thank_you"
+                android:layout_marginStart="4dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="18sp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                style="@style/ButtonStyle.Small.Read" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
