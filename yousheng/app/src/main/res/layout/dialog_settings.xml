@@ -54,6 +54,41 @@
             android:textColor="@color/text_primary"
             android:padding="8dp" />
 
+        <!-- 云端TTS开关 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="云端语音"
+                android:textSize="18sp"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/swCloudTts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvCloudTtsHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="关闭后仅使用本地语音引擎"
+            android:textSize="14sp"
+            android:textColor="@color/text_secondary"
+            android:paddingBottom="12dp" />
+
         <!-- 语速设置 -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,8 +109,8 @@
                 android:id="@+id/sbSpeechRate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:max="19"
-                android:progress="9"
+                android:max="20"
+                android:progress="10"
                 android:enabled="false" />
 
             <LinearLayout
@@ -135,8 +170,8 @@
                 android:id="@+id/sbSpeechPitch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:max="9"
-                android:progress="4"
+                android:max="10"
+                android:progress="5"
                 android:enabled="false" />
 
             <LinearLayout

@@ -15,7 +15,12 @@
       "Bash(./gradlew compileDebugKotlin)",
       "Bash(gradlew compileDebugKotlin)",
       "Bash(./gradlew.bat compileDebugKotlin)",
-      "Bash(java:*)"
+      "Bash(java:*)",
+      "Bash(python -c \"import dashscope; print\\('dashscope imported'\\)\")",
+      "Bash(gradle --version)",
+      "Bash(adb shell *)",
+      "Bash(adb devices *)",
+      "Bash(adb *)"
     ]
   }
 }

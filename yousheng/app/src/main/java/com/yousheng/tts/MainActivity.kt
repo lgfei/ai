@@ -2,9 +2,6 @@ package com.yousheng.tts
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.speech.tts.TextToSpeech
-import android.speech.tts.TextToSpeech.Engine
-import android.speech.tts.UtteranceProgressListener
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
@@ -12,11 +9,10 @@ import android.widget.TextView
 import android.widget.Toast
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
-import java.util.Locale
 
-class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
+class MainActivity : AppCompatActivity() {
 
-    private lateinit var textToSpeech: TextToSpeech
+    private lateinit var ttsManager: TtsManager
     private lateinit var etTextInput: EditText
     private lateinit var btnRead: Button
     private lateinit var btnStop: Button
@@ -36,6 +32,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var speechRate: Float = 1.0f  // 语速默认值1.0
     private var speechPitch: Float = 0.5f  // 语调默认值0.5
     private var useDefaultSettings: Boolean = true
+    private var useCloudTts: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,98 +53,49 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         // 加载历史记录
         loadHistory()
 
-        // 加载语音设置
+        // 加载语音设置（不依赖ttsManager的部分）
         loadSpeechSettings()
 
-        // 初始化 TTS 引擎
-        textToSpeech = TextToSpeech(this, this)
+        // 初始化 TTS 管理器
+        ttsManager = TtsManager(this)
+        ttsManager.setUseCloudTts(useCloudTts)
+        ttsManager.init {
+            // TTS初始化完成后应用语音设置
+            applySpeechSettings()
+            btnRead.isEnabled = true
+        }
+
+        // 设置TTS状态回调
+        ttsManager.onStart = {
+            runOnUiThread {
+                btnRead.isEnabled = false
+                btnStop.isEnabled = true
+                isSpeaking = true
+            }
+        }
+
+        ttsManager.onComplete = {
+            runOnUiThread {
+                btnRead.isEnabled = true
+                btnStop.isEnabled = false
+                isSpeaking = false
+            }
+        }
+
+        ttsManager.onError = { errorMsg ->
+            runOnUiThread {
+                btnRead.isEnabled = true
+                btnStop.isEnabled = false
+                isSpeaking = false
+                Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show()
+            }
+        }
 
         // 设置按钮点击事件
         setupButtonClickListeners()
 
         // 显示欢迎消息
         Toast.makeText(this, "欢迎使用有声文字转语音", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onInit(status: Int) {
-        if (status == TextToSpeech.SUCCESS) {
-            // 设置中文语音（优先尝试简体中文）
-            val result = textToSpeech.setLanguage(Locale.CHINA)
-
-            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                // 如果中文不支持，尝试使用默认语言
-                textToSpeech.language = Locale.getDefault()
-            } else {
-                // 应用语音设置
-                applySpeechSettings()
-
-                // 尝试设置男性声音
-                try {
-                    // 获取可用的语音列表
-                    val voices = textToSpeech.voices
-
-                    // 查找中文男性声音
-                    var maleVoice = voices.find { voice ->
-                        voice.locale == Locale.CHINA &&
-                        voice.name.contains("male", ignoreCase = true)
-                    }
-
-                    // 如果没有找到中文男性声音，尝试查找任何男性声音
-                    if (maleVoice == null) {
-                        maleVoice = voices.find { voice ->
-                            voice.name.contains("male", ignoreCase = true)
-                        }
-                    }
-
-                    // 如果找到男性声音，设置为默认
-                    if (maleVoice != null) {
-                        textToSpeech.voice = maleVoice
-                    } else {
-                        // 如果没有男性声音，尝试设置较低音调的声音
-                        val lowPitchVoice = voices.find { voice ->
-                            voice.locale == Locale.CHINA
-                        }
-                        if (lowPitchVoice != null) {
-                            textToSpeech.voice = lowPitchVoice
-                        }
-                    }
-                } catch (e: Exception) {
-                    // 如果设置失败，使用默认声音
-                    e.printStackTrace()
-                }
-            }
-
-            // 设置语音完成监听
-            textToSpeech.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
-                override fun onStart(utteranceId: String?) {
-                    runOnUiThread {
-                        btnRead.isEnabled = false
-                        btnStop.isEnabled = true
-                        isSpeaking = true
-                    }
-                }
-
-                override fun onDone(utteranceId: String?) {
-                    runOnUiThread {
-                        btnRead.isEnabled = true
-                        btnStop.isEnabled = false
-                        isSpeaking = false
-                    }
-                }
-
-                override fun onError(utteranceId: String?) {
-                    runOnUiThread {
-                        btnRead.isEnabled = true
-                        btnStop.isEnabled = false
-                        isSpeaking = false
-                    }
-                }
-            })
-
-            btnRead.isEnabled = true
-        } else {
-            Toast.makeText(this, "TTS 初始化失败", Toast.LENGTH_LONG).show()
-        }
     }
 
     private fun setupButtonClickListeners() {
@@ -271,7 +219,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun speakPhrase(phrase: String) {
         // 停止当前朗读
         if (isSpeaking) {
-            textToSpeech.stop()
+            ttsManager.stop()
         }
 
         // 移除序号前缀（如"1. "），只朗读实际内容
@@ -280,13 +228,8 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         // 更新当前文本
         currentText = actualText
 
-        // 使用 Bundle 传递参数
-        val utteranceId = "phrase_${System.currentTimeMillis()}"
-        val params = Bundle()
-        params.putString(Engine.KEY_PARAM_UTTERANCE_ID, utteranceId)
-
         // 朗读短语
-        textToSpeech.speak(actualText, TextToSpeech.QUEUE_FLUSH, params, utteranceId)
+        ttsManager.speak(actualText)
 
         // 更新状态
         btnRead.isEnabled = false
@@ -438,6 +381,10 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         useDefaultSettings = settingsPrefs.getBoolean("use_default", true)
         speechRate = settingsPrefs.getFloat("speech_rate", 1.0f)  // 语速默认值1.0
         speechPitch = settingsPrefs.getFloat("speech_pitch", 0.5f)  // 语调默认值0.5
+        useCloudTts = settingsPrefs.getBoolean("use_cloud_tts", true)
+        if (::ttsManager.isInitialized) {
+            ttsManager.setUseCloudTts(useCloudTts)
+        }
     }
 
     private fun saveSpeechSettings() {
@@ -445,19 +392,20 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         editor.putBoolean("use_default", useDefaultSettings)
         editor.putFloat("speech_rate", speechRate)
         editor.putFloat("speech_pitch", speechPitch)
+        editor.putBoolean("use_cloud_tts", useCloudTts)
         editor.apply()
     }
 
     private fun applySpeechSettings() {
-        if (::textToSpeech.isInitialized) {
+        if (::ttsManager.isInitialized) {
             if (useDefaultSettings) {
                 // 使用默认值：语速1.0，音调0.5
-                textToSpeech.setSpeechRate(1.0f)
-                textToSpeech.setPitch(0.5f)
+                ttsManager.setSpeechRate(1.0f)
+                ttsManager.setPitch(0.5f)
             } else {
                 // 使用用户设置
-                textToSpeech.setSpeechRate(speechRate)
-                textToSpeech.setPitch(speechPitch)
+                ttsManager.setSpeechRate(speechRate)
+                ttsManager.setPitch(speechPitch)
             }
         }
     }
@@ -470,19 +418,23 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             return
         }
 
+        // 检查输入长度限制
+        val maxLength = ConfigLoader.getMaxInputLength()
+        val chineseCharCount = currentText.count { it.code > 0x4E00 && it.code < 0x9FFF }
+        if (chineseCharCount > maxLength) {
+            Toast.makeText(this, "输入不能超过${maxLength}个汉字", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         // 添加到历史记录
         addToHistory(currentText)
 
-        // 使用 Bundle 传递参数
-        val utteranceId = this.javaClass.canonicalName
-        val params = Bundle()
-        params.putString(Engine.KEY_PARAM_UTTERANCE_ID, utteranceId)
-
-        textToSpeech.speak(currentText, TextToSpeech.QUEUE_FLUSH, params, utteranceId)
+        // 使用TtsManager朗读
+        ttsManager.speak(currentText)
     }
 
     private fun stopReading() {
-        textToSpeech.stop()
+        ttsManager.stop()
         btnRead.isEnabled = true
         btnStop.isEnabled = false
         isSpeaking = false
@@ -506,6 +458,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         // 获取控件
         val dialogBtnCloseSettings: Button = dialogView.findViewById(R.id.dialogBtnCloseSettings)
+        val swCloudTts: android.widget.Switch = dialogView.findViewById(R.id.swCloudTts)
         val cbUseDefault: android.widget.CheckBox = dialogView.findViewById(R.id.cbUseDefault)
         val sbSpeechRate: android.widget.SeekBar = dialogView.findViewById(R.id.sbSpeechRate)
         val tvSpeechRateValue: TextView = dialogView.findViewById(R.id.tvSpeechRateValue)
@@ -514,17 +467,16 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         val btnSaveSettings: Button = dialogView.findViewById(R.id.btnSaveSettings)
 
         // 初始化控件状态
+        swCloudTts.isChecked = useCloudTts
         cbUseDefault.isChecked = useDefaultSettings
-        updateSeekBarState(cbUseDefault.isChecked, sbSpeechRate, sbSpeechPitch)
+        updateSeekBarState(cbUseDefault.isChecked, sbSpeechRate, sbSpeechPitch, swCloudTts)
 
-        // 设置语速SeekBar初始值（0.1-2.0范围，步长0.1）
-        val rateProgress = ((speechRate - 0.1f) * 10).toInt()
-        sbSpeechRate.progress = rateProgress.coerceIn(0, 19)  // 最大值19对应2.0
+        // 设置语速SeekBar初始值（0~2.0，步长0.1，progress*0.1=值）
+        sbSpeechRate.progress = (speechRate * 10).toInt().coerceIn(0, 20)
         tvSpeechRateValue.text = String.format("%.1f", speechRate)
 
-        // 设置音调SeekBar初始值（0.1-1.0范围，步长0.1）
-        val pitchProgress = ((speechPitch - 0.1f) * 10).toInt()
-        sbSpeechPitch.progress = pitchProgress.coerceIn(0, 9)  // 最大值改为9（对应1.0）
+        // 设置音调SeekBar初始值（0~1.0，步长0.1，progress*0.1=值）
+        sbSpeechPitch.progress = (speechPitch * 10).toInt().coerceIn(0, 10)
         tvSpeechPitchValue.text = String.format("%.1f", speechPitch)
 
         // 关闭按钮点击事件
@@ -534,22 +486,22 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         // 使用默认值复选框变化事件
         cbUseDefault.setOnCheckedChangeListener { _, isChecked ->
-            updateSeekBarState(isChecked, sbSpeechRate, sbSpeechPitch)
+            updateSeekBarState(isChecked, sbSpeechRate, sbSpeechPitch, swCloudTts)
 
-            // 如果勾选使用默认值，自动恢复默认值
+            // 如果勾选使用默认值，自动恢复默认值并开启云端语音
             if (isChecked) {
-                sbSpeechRate.progress = 9  // 对应1.0 (0.1 + 9*0.1 = 1.0)
-                sbSpeechPitch.progress = 4  // 对应0.5 (0.1 + 4*0.1 = 0.5)
+                sbSpeechRate.progress = 10  // 对应1.0
+                sbSpeechPitch.progress = 5  // 对应0.5
                 tvSpeechRateValue.text = "1.0"
                 tvSpeechPitchValue.text = "0.5"
+                swCloudTts.isChecked = true
             }
         }
 
         // 语速SeekBar变化事件
         sbSpeechRate.setOnSeekBarChangeListener(object : android.widget.SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: android.widget.SeekBar?, progress: Int, fromUser: Boolean) {
-                val rate = 0.1f + progress * 0.1f
-                tvSpeechRateValue.text = String.format("%.1f", rate)
+                tvSpeechRateValue.text = String.format("%.1f", progress * 0.1f)
             }
 
             override fun onStartTrackingTouch(seekBar: android.widget.SeekBar?) {}
@@ -559,8 +511,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         // 音调SeekBar变化事件
         sbSpeechPitch.setOnSeekBarChangeListener(object : android.widget.SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: android.widget.SeekBar?, progress: Int, fromUser: Boolean) {
-                val pitch = 0.1f + progress * 0.1f
-                tvSpeechPitchValue.text = String.format("%.1f", pitch)
+                tvSpeechPitchValue.text = String.format("%.1f", progress * 0.1f)
             }
 
             override fun onStartTrackingTouch(seekBar: android.widget.SeekBar?) {}
@@ -569,15 +520,13 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         // 保存设置按钮点击事件
         btnSaveSettings.setOnClickListener {
+            useCloudTts = swCloudTts.isChecked
             useDefaultSettings = cbUseDefault.isChecked
 
             if (!useDefaultSettings) {
-                // 计算语速值（0.1-2.0）
-                speechRate = 0.1f + sbSpeechRate.progress * 0.1f
-                // 计算音调值（0.1-1.0）
-                speechPitch = 0.1f + sbSpeechPitch.progress * 0.1f
+                speechRate = sbSpeechRate.progress * 0.1f
+                speechPitch = sbSpeechPitch.progress * 0.1f
             } else {
-                // 使用默认值
                 speechRate = 1.0f
                 speechPitch = 0.5f
             }
@@ -586,6 +535,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             saveSpeechSettings()
             // 应用设置
             applySpeechSettings()
+            ttsManager.setUseCloudTts(useCloudTts)
 
             Toast.makeText(this, "设置已保存", Toast.LENGTH_SHORT).show()
             dialog.dismiss()
@@ -595,19 +545,20 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         dialog.show()
     }
 
-    private fun updateSeekBarState(useDefault: Boolean, sbSpeechRate: android.widget.SeekBar, sbSpeechPitch: android.widget.SeekBar) {
+    private fun updateSeekBarState(useDefault: Boolean, sbSpeechRate: android.widget.SeekBar, sbSpeechPitch: android.widget.SeekBar, swCloudTts: android.widget.Switch) {
         sbSpeechRate.isEnabled = !useDefault
         sbSpeechPitch.isEnabled = !useDefault
+        swCloudTts.isEnabled = !useDefault
 
-        // 更新SeekBar的alpha值（禁用时变灰）
+        // 更新禁用控件的alpha值（禁用时变灰）
         sbSpeechRate.alpha = if (useDefault) 0.5f else 1.0f
         sbSpeechPitch.alpha = if (useDefault) 0.5f else 1.0f
+        swCloudTts.alpha = if (useDefault) 0.5f else 1.0f
     }
 
     override fun onDestroy() {
-        if (::textToSpeech.isInitialized) {
-            textToSpeech.stop()
-            textToSpeech.shutdown()
+        if (::ttsManager.isInitialized) {
+            ttsManager.shutdown()
         }
         super.onDestroy()
     }

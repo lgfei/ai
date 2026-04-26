@@ -19,15 +19,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="16dp"
-            android:gravity="start"
-            android:weightSum="3">
+            android:gravity="end|center_vertical">
 
             <!-- 系统设置按钮 -->
             <Button
                 android:id="@+id/btnSettings"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginEnd="4dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/ic_settings"
                 android:gravity="center"
                 android:text=""
@@ -38,23 +37,23 @@
             <Button
                 android:id="@+id/btnShowPhrases"
                 style="@style/ButtonStyle.Small.Read"
-                android:layout_width="130dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                android:drawableStart="@drawable/ic_phrases"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
                 android:text="常用语" />
 
             <!-- 最近输入按钮 -->
             <Button
                 android:id="@+id/btnShowHistory"
                 style="@style/ButtonStyle.Small.Control"
-                android:layout_width="125dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
                 android:layout_weight="1"
-                android:drawableStart="@drawable/ic_history"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
                 android:text="历史记录" />
 
         </LinearLayout>
@@ -63,15 +62,15 @@
         <EditText
             android:id="@+id/etTextInput"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="200dp"
+            android:accessibilityLiveRegion="polite"
+            android:background="@android:drawable/edit_text"
             android:gravity="top|start"
             android:hint="@string/hint_input_text"
-            android:inputType="textMultiLine|textCapCharacters|textNoSuggestions"
-            android:background="@android:drawable/edit_text"
-            android:padding="16dp"
-            android:textAppearance="@style/EditTextStyle.Large"
             android:importantForAccessibility="yes"
-            android:accessibilityLiveRegion="polite" />
+            android:inputType="textMultiLine|textCapCharacters|textNoSuggestions"
+            android:padding="16dp"
+            android:textAppearance="@style/EditTextStyle.Large" />
 
         <!-- 主功能按钮区域 -->
         <LinearLayout
@@ -120,9 +119,6 @@
         </LinearLayout>
 
         <!-- 底部空白区域，防止键盘遮挡 -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="60dp" />
 
     </LinearLayout>
 </ScrollView>
