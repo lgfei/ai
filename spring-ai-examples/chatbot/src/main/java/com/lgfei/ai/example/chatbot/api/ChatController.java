@@ -30,8 +30,8 @@ public class ChatController {
         return ResponseEntity.ok(output);
     }
 
-    @GetMapping(value = "/stream/{modelProvider}", produces = "text/html;charset=UTF-8")
-    public Flux<String> streamChat(@PathVariable("c") String modelProvider,
+    @GetMapping(value = "/stream/{model_provider}", produces = "text/html;charset=UTF-8")
+    public Flux<String> streamChat(@PathVariable("model_provider") String modelProvider,
                                    @RequestParam(value = "input", defaultValue = "你是谁") String input)
     {
         ChatClient chatClient = chatModelFactory.getClient(modelProvider);
